@@ -1,3 +1,4 @@
+import os
 from neo4j import GraphDatabase
 import pandas as pd
 from sqlalchemy import create_engine
@@ -51,7 +52,7 @@ def execute_cypher_query(query):
     """
     NEO4J_URI = "neo4j+ssc://ae9fac9e.databases.neo4j.io"
     NEO4J_USER = "neo4j"
-    NEO4J_PASSWORD = "PDruzbnMcxjNCif1egsWxzdi6GLbA_aRPCkPr5MAHcQ"
+    NEO4J_PASSWORD = os.environ.get("NEO4J_PASSWORD")
 
     try:
         # Connect to the Neo4j database
