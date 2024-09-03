@@ -77,36 +77,24 @@ def execute_cypher_query(query):
     finally:
         driver.close()
 
-def test_function(input_string):
-    result_string = "123" + input_string + "123"
-    return {"input_string": input_string, "result_string": result_string}
-
-def get_order_details(order_number):
-    orders_db = {
-        "ORD123": {"location": "New York", "delivery_date": "2024-08-15"},
-        "ORD124": {"location": "Los Angeles", "delivery_date": "2024-08-16"},
-        "ORD125": {"location": "Chicago", "delivery_date": "2024-08-17"}
-    }
-    
-    # Fetch order details
-    order_details = orders_db.get(order_number, None)
-    
-    if order_details:
-        return {"location": order_details["location"], "delivery_date": order_details["delivery_date"]}
-    else:
-        return {"error": "Order not found"}
-
 def get_temperature(city_name):
-    weather_db = {
-        "New York": {"temperature": "25°C"},
-        "Los Angeles": {"temperature": "30°C"},
-        "Chicago": {"temperature": "22°C"}
+    # Hardcoded temperatures for three specific cities
+    temperatures = {
+        "New York": 22,     # Temperature in degrees Celsius
+        "Los Angeles": 28,  # Temperature in degrees Celsius
+        "Chicago": 18       # Temperature in degrees Celsius
     }
-    
-    # Fetch temperature
-    temperature_details = weather_db.get(city_name, None)
-    
-    if temperature_details:
-        return {"temperature": temperature_details["temperature"]}
+
+    # Convert city name to the proper format
+    city_name = city_name.title()
+
+    # Check if the city is in the dictionary and return the temperature in the appropriate format
+    if city_name in temperatures:
+        return {
+            "city": city_name,
+            "temperature": temperatures[city_name]
+        }
     else:
-        return {"error": "City not found"}
+        return {
+            "error": "City not found in the database."
+        }

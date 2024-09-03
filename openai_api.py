@@ -37,6 +37,7 @@ def prompt(messages):
         choice = response.choices[0]
         if hasattr(choice.message, 'tool_calls') and choice.message.tool_calls:
             tool_calls = choice.message.tool_calls
+            print("Tool calls: ", tool_calls)
             tool_responses = []
             for tool_call in tool_calls:
                 function_result = execute_function_call(tool_call)
@@ -52,6 +53,8 @@ def prompt(messages):
                 "model": "gpt-4o-mini",
                 "messages": messages + [choice.message] + tool_responses
             }
+
+            print("Completion payload: ", completion_payload)
 
             # Second call to OpenAI API with the function call results
             final_response = client.chat.completions.create(
