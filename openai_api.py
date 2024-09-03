@@ -3,8 +3,12 @@ import json
 from openai import OpenAI
 import importlib
 
-# Load the tools from the tools.json file
-with open('tools.json') as f:
+# Get the directory of the current file (openai_api.py)
+current_dir = os.path.dirname(os.path.abspath(__file__))
+
+# Load the tools from the tools.json file using the absolute path
+tools_path = os.path.join(current_dir, 'tools.json')
+with open(tools_path) as f:
     tools = json.load(f)
 
 def dynamic_import_function(function_name):
