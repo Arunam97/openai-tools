@@ -1,4 +1,4 @@
-from openai_api import prompt
+from openai_util.openai_api import prompt
 
 def main():
     messages = []
